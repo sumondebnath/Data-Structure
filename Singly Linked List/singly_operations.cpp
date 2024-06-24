@@ -17,9 +17,14 @@ public:
 
 
 
-void insert_at_Head(Node *&head, int val)
+void insert_at_Head(Node *&head, Node* &tail, int val)
 {
     Node *newNode = new Node(val);
+    if(head == NULL){
+        head=newNode;
+        tail = newNode;
+        return;
+    }
     newNode->next = head;
     head = newNode;
 }
@@ -36,22 +41,26 @@ void delete_head(Node* &head){
 
 
 
-void Insert_at_Tail(Node *&head, int val)
+void Insert_at_Tail(Node *&head, Node* &tail, int val)
 {
     Node *newNode = new Node(val);
 
     if (head == NULL)
     {
         head = newNode;
+        tail = newNode;
         return;
     }
 
-    Node *temp = head;
-    while (temp->next != NULL)
-    {
-        temp = temp->next;
-    }
-    temp->next = newNode;
+    tail->next = newNode;
+    tail = newNode;
+
+    // Node *temp = head;
+    // while (temp->next != NULL)
+    // {
+    //     temp = temp->next;
+    // }
+    // temp->next = newNode;
 }
 
 
@@ -121,6 +130,7 @@ int main()
 {
 
     Node *head = NULL;
+    Node* tail = NULL;
 
     while (true)
     {
@@ -143,13 +153,13 @@ int main()
         {
             int val;
             cin >> val;
-            insert_at_Head(head, val);
+            insert_at_Head(head, tail, val);
         }
         else if (op == 2)
         {
             int val;
             cin >> val;
-            Insert_at_Tail(head, val);
+            Insert_at_Tail(head, tail, val);
         }
         else if (op == 3)
         {
@@ -158,7 +168,7 @@ int main()
             cin >> pos >> val;
             if (pos == 0)
             {
-                insert_at_Head(head, val);
+                insert_at_Head(head, tail, val);
             }
             else
             {

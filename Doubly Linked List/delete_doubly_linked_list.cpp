@@ -31,14 +31,16 @@ void insert_at_head(Node *&head, Node *&tail, int val)
     head = newNode;
 }
 
-void delete_from_head(Node* &head){
-    if(head == NULL){
-        return;
-    }
+void delete_from_head(Node* &head, Node* &tail){
+    
     Node* deleteNode = head;
     head = head->next;
-    head->prev = NULL;
     delete deleteNode;
+    if(head == NULL){
+        tail = NULL;
+        return;
+    }
+    head->prev = NULL;
 }
 
 void insert_at_tail(Node *&head, Node *&tail, int val)
@@ -55,14 +57,16 @@ void insert_at_tail(Node *&head, Node *&tail, int val)
     tail = newNode;
 }
 
-void delete_from_tail(Node* &tail){
-    if(tail == NULL){
-        return;
-    }
+void delete_from_tail(Node* &head, Node* &tail){
+    
     Node* deleteNode = tail;
     tail = tail->prev;
-    tail->next = NULL;
     delete deleteNode;
+    if(tail == NULL){
+        head=NULL;
+        return;
+    }
+    tail->next = NULL;
 }
 
 void insert_at_any_position(Node* head, int pos, int val){
@@ -139,10 +143,10 @@ int main()
 
         if (pos == 0)
         {
-            delete_from_head(head);
+            delete_from_head(head, tail);
         }
         else if(pos == size(head)-1){
-            delete_from_tail(tail);
+            delete_from_tail(head, tail);
         }
         else if(pos >= size(head)){
             cout<<"Invalid Index."<<endl;
