@@ -1,0 +1,7 @@
+
+    Priority Queue:
+
+1. Priority Queue Kind of Heap STL(standard template library), because heap have max heap and min heap.
+    here, Priority Queue store value also asending and desending order and return first / front value max or min.
+
+2. 
